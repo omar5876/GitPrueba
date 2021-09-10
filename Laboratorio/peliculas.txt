@@ -1,0 +1,3 @@
+Pelicula{nombre=Off the wall}
+Pelicula{nombre=Thriller}
+Pelicula{nombre=Bad}
