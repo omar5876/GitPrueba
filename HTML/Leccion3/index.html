@@ -1,59 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fromularios en HTML</title>
-  <h1>Formularios en HTML</h1>
-  <form method="POST">
-    <label for="nombre">Nombre:</label><br/>
-    <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required="true"/>
-  </br>
-    <label for="apellido">Apellido:</label><br/>
-    <input type="text" id="apellido" name="apellido" placeholder="Escribe tu apellido" required="true"/>
-</br>
-<label for="password">password</label><br/>
-<input type="password" id="password" name="password" placeholder="Ingresa tu password" required="true"></br>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Login</title>
+    <link href="CSS/" rel="stylesheet">
+  </head>
+  <body>
+    <div class="contenedor">
+      <h2>Formulario</h2>
+      <form id="forma" name="forma" method="POST">
+        <div class="elemento">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" name="usuario" required="true">
+        </div>
+        <div class="elemento">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required="true">
+        </div>
+        <div class="elemento">
+          <input type="submit" value="Enviar">
+        </div>
 
-    <label for="email">Email:</label><br/>
-    <input type="email" id="email" name="email"><br/>
-
-    <label for="edad">Edad:</label><br/>
-    <input type="number" id="edad" name="edad" step="any"><br/>
-
-    <label>Genero</label><br/>
-    <input type="radio" id="femenino" name="genero" value="femenino">
-    <label for="femenino">Femenino</label><br/>
-    <input type="radio" id="masculino" name="genero" value="masculino">
-    <label for="masculino">Masculino</label><br/>
-
-    <label>Musica favorita</label><br/>
-    <input type="checkbox" id="clasica" name="musica" value="clasica">
-    <label for="clasica">Clasica</label><br/>
-
-    <input type="checkbox" id="jazz" name="musica" value="jazz">
-    <label for="jazz">Jazz</label><br/>
-
-    <label for="autos">Marca de auto favorita</label><br/>
-    <select id="autos" name="autos">
-      <option value="volvo">Volvo</option>
-      <option value="bmw">BMW</option>
-      <option value="audi" selected="true">Audi</option>
-    </select>
-    <br/>
-
-    <label for="comentario">Comentario</label><br/>
-    <textarea id="comentario" name="comentario" rows="2" cols="30"> 
-Este es mi comentario
-    </textarea>
-    <br/>
-    <input type="submit" value="Enviar"/>
-    <input type="submit" formnovalidate="formnovalidate" value="Enviar sin validar">
-  </form>
-</head>
-<body>
-  
-</body>
+      </form>
+    </div>
+  </body>
 </html>
