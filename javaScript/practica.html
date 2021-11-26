@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const numeros = [1, 2, 3];
+        const [uno, dos, tres] = numeros;
+
+        console.log(uno);
+
+        function sumar(a,b,...c){
+            let resultado = a + b;
+            c.forEach(n => resultado += n)
+            return resultado;
+        }
+        console.log(sumar(1, 2, 3, 4));
+
+        console.table([1, 2, 33]);
+        function nombre(nombre){
+            nombre = nombre || "Anonimo";
+            console.log(`Mi nombre es ${nombre}`)
+        }
+        nombre("Omar");
+        let input = prompt("Ingresa un valor");
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

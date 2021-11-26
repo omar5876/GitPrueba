@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulos</title>
+</head>
+<body>
+    <script>
+        /*function miFuncion(arr = undefined){
+            if(arr === undefined) console.warn("No ingresaste nada");
+            if(!(arr instanceof Array))console.warn("No es una Array");
+            if(arr.length === 0)console.warn("El array esta vacio");
+            if(arr.length === 1)console.warn("El array debe tener almenos 2 elementos");
+            for(let i of arr){
+                if(typeof i !== "number")console.warn("No es un arreglo de numeros")
+            }
+
+            return arr.reduce((acc, valor, indice, arr) => {
+                acc += valor;
+                if(indice === arr.length - 1){
+                    return `El promedio de : [${arr.join(" + ")}] es : ${acc / arr.length}`;
+                }else{
+                    return acc;
+                }
+            })
+
+        }
+        console.log(miFuncion([1,2,2,3,3,3,4,4,4,4,5,5,5,5,5]));*/
+
+        class Pelicula{
+            constructor({id, titulo, director, estreno, pais, generos, calificacion}){
+                this.id = id;
+                this.titulo = titulo;
+                this.director = director;
+                this.estreno = estreno;
+                this.pais = pais;
+                this.generos = generos;
+                this.calificacion = calificacion;
+
+                this.validarIMDB(id);
+                this.validarDirector(director);
+                this.validarTitulo(titulo);
+                this.validarEstreno(estreno);
+                this.validarPais(pais);
+                this.validarGeneros(generos);
+                this.validarCalificacion(calificacion);
+            }
+
+            validarCadena(propiedad, valor){
+                if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`);
+                if(typeof valor !== "string") return console.warn(`${propiedad} "${valor}" no es una cadena`);
+                return true;
+            }
+
+            validarLongitudCadena(propiedad, valor, longitud){
+                if(valor.length > longitud) return console.warn(`${propiedad} "${valor}" excede el numero de caracteres ${longitud}`);
+                return true;
+            }
+
+            validarNumero(propiedad, valor){
+                if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`);
+                if(typeof valor !== "number") return console.warn(`${propiedad} "${valor}" no es un numero`);
+            }
+
+            validarIMDB(id){
+                if(this.validarCadena("IMDB id", id))
+                    if(!(/^([a-z]){2}([0-9]){7}$/.test(id)))
+                        return console.error(`"IMDB id" ${id} no es valido, debe tener 2 letras y 7 numeros`);
+                    
+                
+            }
+
+            validarArreglo(propiedad, valor){
+                if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`);
+                if(!(valor instanceof Array)) return console.warn(`${propiedad} "${valor}" NO es un array`);
+                if(valor.length === 0) return console.warn(`${propiedad} "${valor}" Esta vacio`);
+                for(let e of valor){
+                    if(typeof e !== "string") return console.warn(`El valor ${e} no un string`)
+                }
+            }
+
+            validarTitulo(titulo){
+                if(this.validarCadena("titulo", titulo))
+                    this.validarLongitudCadena("Titulo", titulo, 100);
+            }
+
+            validarDirector(director){
+                if(this.validarCadena("Director", director))
+                    this.validarLongitudCadena("Director", director, 50);
+            }
+
+            validarEstreno(estreno){
+                if(this.validarNumero("Año de estreno", estreno))
+                    if(!(/^([0-9]){4}$/.test(estreno)))
+                        return console.error(`"Año de estreno" ${estreno} NO es valido, debe ser un numero de 4 digitos`);
+            }
+
+            validarPais(pais){
+                this.validarArreglo("Pais", pais);
+            }
+
+            validarGeneros(generos){
+                this.validarArreglo("Generos", generos);
+                for(let g of generos){
+                    if(!Pelicula.listaGeneros.includes(g)){
+                        console.error(`Generos Incorrectos: ${generos.join(", ")}`);
+                        Pelicula.generosPermitidos();
+                    } 
+                }
+            }
+
+            validarCalificacion(calificacion){
+                if(this.validarNumero("Calificacion", calificacion)){
+                    return (calificacion < 0 || calificacion > 10)
+                    ?console.error("la calificacion debe ser de 0 a 10")
+                    :this.calificacion = calificacion.toFixed(1);
+                }
+            }
+
+            static get listaGeneros(){
+                return ["Action", "Adult", "Adventure", "Animation", "Biography", 
+                "Comedy", "Crime", "Documentary" ,"Drama", "Family", "Fantasy",
+                 "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", 
+                 "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", 
+                 "Talk-Show", "Thriller", "War", "Western"];
+            }
+
+            static generosPermitidos(){
+                return console.info(`Generos Permitidos: \n[${Pelicula.listaGeneros.join(", ")}]`);
+            }
+
+            fichaTecnica(){
+                return console.info(`\t\t\tFICHA TECNICA:
+                \n-Titulo: ${this.titulo}
+                \n-Director: ${this.director}
+                \n-Estreno: ${this.estreno}
+                \n-Pais: ${this.pais.join(", ")}
+                \n-Generos: ${this.generos.join(", ")}
+                \n-Calificacion: ${this.calificacion.toFixed(1)}
+                \n-IMDB: ${this.id}`);
+            }
+
+            
+        }
+
+        const pelicula = new Pelicula({
+            id: "tt6541234",
+            titulo: "Rocky",
+            director: "Stallone",
+            estreno: 2020,
+            pais: ["Mexico", "Colombia"],
+            generos: ["Comedy", "Sport"],
+            calificacion: 7.789
+        });
+
+        Pelicula.generosPermitidos();
+
+        pelicula.fichaTecnica();
+
+        const fichas = [
+            {
+                id: "tt6541234",
+                titulo: "Rocky",
+                director: "Stallone",
+                estreno: 1976,
+                pais: ["Mexico", "Colombia"],
+                generos: ["Comedy", "Sport"],
+                calificacion: 7.123
+            },
+            {
+                id: "tt6541235",
+                titulo: "Rocky II",
+                director: "Stallone",
+                estreno: 1979,
+                pais: ["Mexico", "Colombia"],
+                generos: ["Comedy", "Sport"],
+                calificacion: 7.456
+            },
+            {
+                id: "tt6541236",
+                titulo: "Rambo",
+                director: "Stallone",
+                estreno: 1981,
+                pais: ["Mexico", "Colombia"],
+                generos: ["Comedy", "Sport"],
+                calificacion: 7.789
+            }
+        ];
+
+        fichas.forEach(el => new Pelicula(el).fichaTecnica());
+    </script>
+</body>
+</html>
